@@ -14,12 +14,57 @@
 
         <!--Add your CSS rules here-->
         <style>
+        html{
+            height: 100%;
+        }    
+        h1,h2{
+
+               color: red;
+               font-family: 'Anton', sans-serif;
+               
+           } 
+        a{
+            text-decoration: none;
+        }
+        body{
+            height: 100%;
+            text-align: center;
+            background: url(https://images.unsplash.com/photo-1589053739346-ed32227546a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80);
+            background-size: 150% 150%;
+            background-repeat: no-repeat;
+            animation: bg-animation 15s ease-in-out infinite;
+        }
+        @keyframes bg-animation {
+            0%{
+                background-position: left;
+            }
             
+            50%{
+                background-position:right;
+            }
+            100%{
+                background-position: left;
+            }
+        }
+        #container{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;            
+        }
+        
+
         </style>
     </head>
     <body>
+        <div id="container">
         <h1>Hollywood Quiz</h1>
-        <a href="game.html"><i class="ri-play-circle-fill"></i></a>
-        <h2>PLAY</h2>
+        <div>
+            <a href="game.html"><i class="ri-play-circle-fill ri-4x"></i></a>
+            <h2>PLAY</h2>
+        </div>
+        <div></div>
+        </div>    
+    </div>
     </body>
 </html>
