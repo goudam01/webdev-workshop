@@ -1,5 +1,5 @@
 const TRIVIA_API_URL = "https://opentdb.com/api.php?amount=1&category=11&difficulty=easy&type=multiple"; // see https://opentdb.com/api_config.php
-const TENOR_API_KEY = ""; // you need to replace this with your own API key from Tenor (see https://tenor.com/gifapi)
+const TENOR_API_KEY = "GUGOYT1P8KOM"; // you need to replace this with your own API key from Tenor (see https://tenor.com/gifapi)
 const TENOR_API_URL = "https://g.tenor.com/v1/search?q=QUERY&key=API_KEY&limit=10".replace("API_KEY", TENOR_API_KEY);
 
 let correct_answer = ""; // the current correct answer
@@ -60,16 +60,37 @@ function register_answer_button_clicks() {
 function fetch_new_question() {
     // TBD fetch question data from Trivia DB API then call on_question_load(question, answer_options, answer)
     // HINT: "javascript fetch api", "javascript get random number in range", "javascript add element into array at position"
+    fetch(TRIVIA_API_URL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            
+            //question=data["results"][0]["question"];
+            //answer=data["results"][0]["correct_answer"];
+            //answer_options=data["results"][0]["incorrect_answers"];
+            //answer_insert_index=Math.floor(Math.random()*4);
+            //answer_options.slice(answer_insert_index,0,answer);
+            //console.log(answer_options);
+            //on_question_load(question,answer,answer_options);
+        })
+
 }
 
 function update_question_text(question) {
     // TBD update the text of the question
     // HINT: "javascript find element by id", "javascript update element text"
+    document.getElementById("question_text").innerHTML=question;
 }
 
 function update_answer_buttons_text(answer_options) {
+    //let answer_buttons=document.getElementsByClassName("answer_button");
+    //for(let i=0;i<answer_buttons.length;i++){
+      //  answer_buttons[i].innerHTML=answer_options[i];
+    //}
     // TBD update the text of the 4 answer buttons
     // HINT: "javascript find elements by class", "javascript update element text"
+
 }
 
 function store_correct_answer(answer) {
@@ -136,6 +157,8 @@ function go_to_homepage() {
     // TBD navigate to homepage ("index.html")
     // HINT: "javascript navigate to a different page"
 }
+
+window.onload=on_page_load;
 
 // TBD call on_page_load when the page loads
 // HINT: "javascript run code after page load"
