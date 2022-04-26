@@ -65,14 +65,12 @@ function fetch_new_question() {
             return response.json();
         })
         .then(function(data){
-            
-            //question=data["results"][0]["question"];
-            //answer=data["results"][0]["correct_answer"];
-            //answer_options=data["results"][0]["incorrect_answers"];
-            //answer_insert_index=Math.floor(Math.random()*4);
-            //answer_options.slice(answer_insert_index,0,answer);
-            //console.log(answer_options);
-            //on_question_load(question,answer,answer_options);
+            question=data["results"][0]["question"];
+            answer=data["results"][0]["correct_answer"];
+            answer_options=data["results"][0]["incorrect_answers"];
+            answer_insert_index=Math.floor(Math.random()*4);
+            answer_options.splice(answer_insert_index,0,answer);
+            on_question_load(question,answer_options,answer);
         })
 
 }
@@ -84,10 +82,11 @@ function update_question_text(question) {
 }
 
 function update_answer_buttons_text(answer_options) {
-    //let answer_buttons=document.getElementsByClassName("answer_button");
-    //for(let i=0;i<answer_buttons.length;i++){
-      //  answer_buttons[i].innerHTML=answer_options[i];
-    //}
+    let answer_buttons=document.getElementsByClassName("answer_button");
+    for(let i=0; i<answer_buttons.length;i++){
+        answer_buttons[i].innerHTML=answer_options[i];
+    }
+    
     // TBD update the text of the 4 answer buttons
     // HINT: "javascript find elements by class", "javascript update element text"
 
@@ -96,16 +95,28 @@ function update_answer_buttons_text(answer_options) {
 function store_correct_answer(answer) {
     // TBD update correct_answer with answer
     // HINT: "javascript assignment operator"
+    correct_answer=answer;
 }
 
 function fetch_clue_image_gif(answer) {
     // TBD fetch clue image gif from Tenor API (after replacing the QUERY) then call on_clue_image_gif_load(gif_url)
     // HINT: "javascript fetch api", "javascript string replace", "javascript get random number in range"
+    fetch(TENOR_API_URL.replace("QUERY",answer))
+    .then(response=>response.json())
+    .then(data=>{
+            const data_length=data["results"].length;
+            const random_index=Math.floor(Math.random()*data_length);
+            const media=data["results"][random_index]["media"][0];
+            on_clue_image_gif_load(media["nanogif"]["url"]);
+            
+    });
 }
 
 function update_clue_image(gif_url) {
     // TBD update the clue image with the gif url
     // HINT: "javascript find element by id", "javascript update image url"
+    document.getElementById("question_clue_image").setAttribute("src", gif_url);
+
 }
 
 function check_answer(clicked_button, on_correct_answer, on_wrong_answer) {
